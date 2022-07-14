@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <div class="row my-4">
+        <div class="col"></div>
+        <div class="col offset-end-2">
+          <h4 class="text-danger">Register Here</h4>
+          {% if messages %}
+      {% for message in messages %}
+      <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5{% endif %}{{message}}"></p>
+          {% endfor %}
+          {% endif %}
+      <form action="" method="post" novalidate>
+          {% csrf_token %}
+          {% for f in fm %}
+          <div class="form-group">
+        {{f.label_tag}}{{f}}<small class="text-warning">{{f.errors|striptags}}</small>
+        </div>
+          {% endfor %}
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="{% url 'login' %}"><span class="btn btn-primary">Login</span></a>
+          {% if fm.non_field_errors %}
+          {% for error in fm.non_field_errors %}
+          <p class="alert alert-danger my-3">{{error}}</p>
+          {% endfor %}
+          {% endif %}
+      </form>
+        </div>
+      </div>
+    
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>   
+</body>
+</html>
